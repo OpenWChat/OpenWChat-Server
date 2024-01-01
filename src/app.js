@@ -1,71 +1,71 @@
-import dotenv from "dotenv";
-dotenv.config();
+import dotenv from 'dotenv'
+dotenv.config()
 
-import express from "express";
-import morgan from "morgan";
-import helmet from "helmet";
-import mongoSanitize from "express-mongo-sanitize";
-import cookieParser from "cookie-parser";
-import compression from "compression";
-import fileupload from "express-fileupload";
-import cors from "cors";
-import createHttpError from "http-errors";
-import routes from "./routes/index.js";
+import express from 'express'
+import morgan from 'morgan'
+import helmet from 'helmet'
+import mongoSanitize from 'express-mongo-sanitize'
+import cookieParser from 'cookie-parser'
+import compression from 'compression'
+import fileupload from 'express-fileupload'
+import cors from 'cors'
+import createHttpError from 'http-errors'
+import routes from './routes/index.js'
 
-const app = express();
+const app = express()
 
 // Middlewares
 
 app.use((err, _req, res) => {
-    console.error(err.stack);
-    res.status(500).send("Something went wrong!");
-});
+    console.error(err.stack)
+    res.status(500).send('Something went wrong!')
+})
 
-if (process.env.NODE_ENV === "development") {
-    app.use(morgan("dev"));
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'))
 }
 
-app.use(helmet());
+app.use(helmet())
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-app.use(mongoSanitize());
+app.use(mongoSanitize())
 
-app.use(cookieParser());
+app.use(cookieParser())
 
-app.use(compression());
+app.use(compression())
 
 app.use(
     fileupload({
-        useTempFiles: true
+        useTempFiles: true,
     })
-);
+)
 
 app.use(
     cors({
-        origin: `http://localhost:${process.env.PORT || 8000}`
+        origin: `http://localhost:${process.env.PORT || 8000}`,
     })
-);
+)
 
 // Routes
 
-app.use("/api/v1", routes);
+app.use('/api/v1', routes)
 
 // Error Handling
 
 app.use(async (_err, _req, _res, next) => {
-    next(createHttpError.NotFound("This route does not exist."));
-});
+    next(createHttpError.NotFound('This route does not exist.'))
+})
 
 app.use(async (err, _req, res) => {
-    res.status(err.status || 500);
+    res.status(err.status || 500)
     res.send({
         error: {
             status: err.status || 500,
-            message: err.message
-        }
-    });
-});
+            message: err.message,
+        },
+    })
+})
 
-export default app;
+export default app

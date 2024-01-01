@@ -1,4 +1,5 @@
-import { UserModel } from "./user.js";
-import { ConversationModel } from "./conversation.js";
+import { UserModel } from './user.js'
+import { ConversationModel } from './conversation.js'
+import { MessageModel } from './message.js'
 
-export { UserModel, ConversationModel };
+export { UserModel, ConversationModel, MessageModel }
