@@ -7,7 +7,9 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node ./src/index.js",
-        "dev": "cross-env NODE_ENV=development nodemon ./src/index.js"
+        "dev": "cross-env NODE_ENV=development nodemon ./src/index.js",
+        "format": "prettier --write \"src/**/*.js\"",
+        "lint:fix": "eslint --fix \"src/**/*.js\""
     },
     "author": "Mahdi Ettehadnejad",
     "license": "MIT",
@@ -25,6 +27,7 @@
         "http-errors": "^2.0.0",
         "mongoose": "^8.0.3",
         "morgan": "^1.10.0",
+        "prettier": "^3.1.1",
         "trim-request": "^1.0.6",
         "validator": "^13.11.0"
     },
