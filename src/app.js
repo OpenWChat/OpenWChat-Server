@@ -1,5 +1,5 @@
-import dotenv from "dotenv"
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 
 import express from "express";
 import morgan from "morgan";
@@ -50,7 +50,7 @@ app.use(
 
 // Routes
 
-app.use("/api", routes)
+app.use("/api/v1", routes);
 
 // Error Handling
 
