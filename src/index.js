@@ -1,8 +1,9 @@
-import dotenv from 'dotenv'
-dotenv.config()
-
 import mongoose from 'mongoose'
 import app from './app.js'
+import dotenv from 'dotenv'
+import { Server } from 'socket.io'
+
+dotenv.config()
 
 const DB_URL = process.env.DB_URL
 const PORT = process.env.PORT || 8000
@@ -21,9 +22,24 @@ if (process.env.NODE_ENV === 'development') {
     mongoose.set('debug', true)
 }
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`🚀 ~ Mode: ${process.env.NODE_ENV} ~ Running on port: ${PORT}`)
 })
+
+// SocketIO
+
+const io = new Server(server, {
+    pingTimeout: 60000,
+    cors: {
+        origin: process.env.CLINT_ENDPOINT,
+    },
+})
+
+io.on('connection', () => {
+    console.info('Socket io connected successfully.')
+})
+
+// Error handling
 
 process.on('uncaughtExeption', (err) => {
     console.error('Uncaught Exeption:', err)
