@@ -42,15 +42,11 @@ app.use(
     })
 )
 
-app.use(
-    cors({
-        origin: `http://localhost:${process.env.PORT || 8000}`,
-    })
-)
+app.use(cors())
 
 // Routes
 
-app.use('/api/v1', routes)
+app.use('/', () => console.log('object'))
 
 // Error Handling
 
@@ -60,6 +56,7 @@ app.use(async (_err, _req, _res, next) => {
 
 app.use(async (err, _req, res) => {
     res.status(err.status || 500)
+    
     res.send({
         error: {
             status: err.status || 500,
