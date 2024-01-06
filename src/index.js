@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import app from './app.js'
 import dotenv from 'dotenv'
 import { Server } from 'socket.io'
+import socketServer from './socket.server.js'
 
 dotenv.config()
 
@@ -35,8 +36,9 @@ const io = new Server(server, {
     },
 })
 
-io.on('connection', () => {
+io.on('connection', (socket) => {
     console.info('Socket io connected successfully.')
+    socketServer(socket)
 })
 
 // Error handling
