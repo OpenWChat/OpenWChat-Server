@@ -53,12 +53,16 @@ export const createUser = async (userData) => {
         )
     }
 
+    const saltRounds = 10
+
+    const hashedPass = await bcrypt.hash(password, saltRounds)
+
     const user = await new UserModel({
         name,
         email,
         picture: picture || DEFAULT_PICTURE,
         status: status || DEFAULT_STATUS,
-        password,
+        password: hashedPass,
     }).save()
 
     return user

@@ -9,17 +9,11 @@ import cookieParser from 'cookie-parser'
 import compression from 'compression'
 import fileupload from 'express-fileupload'
 import cors from 'cors'
-import createHttpError from 'http-errors'
 import routes from './routes/index.js'
 
 const app = express()
 
 // Middlewares
-
-app.use((err, _req, res) => {
-    console.error(err.stack)
-    res.status(500).send('Something went wrong!')
-})
 
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
@@ -46,23 +40,6 @@ app.use(cors())
 
 // Routes
 
-app.use('/', () => console.log('object'))
-
-// Error Handling
-
-app.use(async (_err, _req, _res, next) => {
-    next(createHttpError.NotFound('This route does not exist.'))
-})
-
-app.use(async (err, _req, res) => {
-    res.status(err.status || 500)
-    res.send({
-        error: {
-            status: err.status || 500,
-            
-            message: err.message,
-        },
-    })
-})
+app.use('/api/v1', routes)
 
 export default app
