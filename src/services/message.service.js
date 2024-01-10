@@ -1,8 +1,7 @@
 import { MessageModel } from '../models/index.js'
 export const createMessage = async (data) => {
     let newMessage = await MessageModel.create(data)
-    if (!newMessage)
-        return ('Oops...Something went wrong !')
+    if (!newMessage) return 'Oops...Something went wrong !'
     return newMessage
 }
 
@@ -23,7 +22,7 @@ export const populateMessage = async (id) => {
                 model: 'UserModel',
             },
         })
-    if (!msg) return ('Oops...Something went wrong !')
+    if (!msg) return 'Oops...Something went wrong !'
     return msg
 }
 
@@ -32,7 +31,7 @@ export const getConvoMessages = async (convo_id) => {
         .populate('sender', 'name picture email status')
         .populate('conversation')
     if (!messages) {
-        return ('Oops...Something went wrong !')
+        return 'Oops...Something went wrong !'
     }
     return messages
 }
