@@ -1,4 +1,3 @@
-import createHttpError from 'http-errors'
 import {
     createConversation,
     doesConversationExist,
@@ -15,9 +14,9 @@ export const create_open_conversation = async (req, res, next) => {
                 console.error(
                     'please provide the user id you wanna start a conversation with !'
                 )
-                throw createHttpError.BadGateway(
-                    'Oops...Something went wrong !'
-                )
+                return res.status(400).json({
+                    message: 'Oops...Something went wrong !',
+                })
             }
 
             const existed_conversation = await doesConversationExist(
@@ -68,12 +67,14 @@ export const createGroup = async (req, res, next) => {
     const { name, users } = req.body
     users.push(req.user.userId)
     if (!name || !users) {
-        throw createHttpError.BadRequest('Please fill all fields.')
+        return res.status(400).json({
+            message: 'Please fill all fields.',
+        })
     }
     if (users.length < 2) {
-        throw createHttpError.BadRequest(
-            'Atleast 2 users are required to start a group chat.'
-        )
+        return res.status(400).json({
+            message: 'Atleast 2 users are required to start a group chat.',
+        })
     }
     let convoData = {
         name,

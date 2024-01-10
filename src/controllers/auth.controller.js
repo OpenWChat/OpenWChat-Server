@@ -1,4 +1,3 @@
-import createHttpError from 'http-errors'
 import { createUser, signUser } from '../services/auth.service.js'
 import { generateToken, verifyToken } from '../services/token.service.js'
 import { findUser } from '../services/user.service.js'
@@ -13,6 +12,11 @@ export const register = async (req, res, next) => {
             status,
             password,
         })
+
+        if (typeof newUser === 'string') {
+            return res.status(400).json({ message: newUser })
+        }
+
         const access_token = await generateToken(
             { userId: newUser._id },
             '1d',
@@ -50,6 +54,12 @@ export const login = async (req, res, next) => {
     try {
         const { email, password } = req.body
         const user = await signUser(email, password)
+        
+        if (typeof newUser === 'string') {
+            return res.status(400).json({ message: user })
+        }
+
+
         const access_token = await generateToken(
             { userId: user._id },
             '1d',
@@ -97,7 +107,10 @@ export const logout = async (_req, res, next) => {
 export const refreshToken = async (req, res, next) => {
     try {
         const refresh_token = req.cookies.refreshtoken
-        if (!refresh_token) throw createHttpError.Unauthorized('Please login.')
+        if (!refresh_token)
+            return res.status(401).json({
+                message: 'Please login.',
+            })
         const check = await verifyToken(
             refresh_token,
             process.env.REFRESH_TOKEN_SECRET
