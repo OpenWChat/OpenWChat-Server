@@ -1,4 +1,3 @@
-import createHttpError from 'http-errors'
 import { ConversationModel, UserModel } from '../models/index.js'
 
 export const doesConversationExist = async (
@@ -18,7 +17,7 @@ export const doesConversationExist = async (
             .populate('latestMessage')
 
         if (!convos)
-            throw createHttpError.BadRequest('Oops...Something went wrong !')
+            return ('Oops...Something went wrong !')
 
         convos = await UserModel.populate(convos, {
             path: 'latestMessage.sender',
@@ -32,7 +31,7 @@ export const doesConversationExist = async (
             .populate('latestMessage')
 
         if (!convo)
-            throw createHttpError.BadRequest('Oops...Something went wrong !')
+            return ('Oops...Something went wrong !')
         convo = await UserModel.populate(convo, {
             path: 'latestMessage.sender',
             select: 'name email picture status',
@@ -45,7 +44,7 @@ export const doesConversationExist = async (
 export const createConversation = async (data) => {
     const newConvo = await ConversationModel.create(data)
     if (!newConvo)
-        throw createHttpError.BadRequest('Oops...Something went wrong !')
+        return ('Oops...Something went wrong !')
     return newConvo
 }
 
@@ -58,7 +57,7 @@ export const populateConversation = async (
         _id: id,
     }).populate(fieldToPopulate, fieldsToRemove)
     if (!populatedConvo)
-        throw createHttpError.BadRequest('Oops...Something went wrong !')
+        return ('Oops...Something went wrong !')
     return populatedConvo
 }
 export const getUserConversations = async (user_id) => {
@@ -78,7 +77,7 @@ export const getUserConversations = async (user_id) => {
             conversations = results
         })
         .catch(() => {
-            throw createHttpError.BadRequest('Oops...Something went wrong !')
+            return ('Oops...Something went wrong !')
         })
     return conversations
 }
@@ -88,7 +87,7 @@ export const updateLatestMessage = async (convo_id, msg) => {
         latestMessage: msg,
     })
     if (!updatedConvo)
-        throw createHttpError.BadRequest('Oops...Something went wrong !')
+        return ('Oops...Something went wrong !')
 
     return updatedConvo
 }

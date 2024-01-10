@@ -24,6 +24,11 @@ export const create_open_conversation = async (req, res, next) => {
                 receiver_id,
                 false
             )
+
+            if (typeof existed_conversation === 'string') {
+                return res.status(400).json({ message: existed_conversation })
+            }
+
             if (existed_conversation) {
                 res.json(existed_conversation)
             } else {
@@ -47,6 +52,13 @@ export const create_open_conversation = async (req, res, next) => {
                 '',
                 isGroup
             )
+
+            if (typeof existed_group_conversation === 'string') {
+                return res
+                    .status(400)
+                    .json({ message: existed_group_conversation })
+            }
+
             res.status(200).json(existed_group_conversation)
         }
     } catch (error) {
