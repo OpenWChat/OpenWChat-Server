@@ -55,7 +55,7 @@ export const login = async (req, res, next) => {
         const { email, password } = req.body
         const user = await signUser(email, password)
         
-        if (typeof newUser === 'string') {
+        if (typeof user === 'string') {
             return res.status(400).json({ message: user })
         }
 
