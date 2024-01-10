@@ -56,6 +56,7 @@ export const populateConversation = async (
     const populatedConvo = await ConversationModel.findOne({
         _id: id,
     }).populate(fieldToPopulate, fieldsToRemove)
+    
     if (!populatedConvo)
         return ('Oops...Something went wrong !')
     return populatedConvo

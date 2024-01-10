@@ -39,6 +39,11 @@ export const create_open_conversation = async (req, res, next) => {
                     users: [sender_id, receiver_id],
                 }
                 const newConvo = await createConversation(convoData)
+
+                if (typeof newConvo === 'string') {
+                    return res.status(400).json({ message: newConvo })
+                }
+
                 const populatedConvo = await populateConversation(
                     newConvo._id,
                     'users',
@@ -97,6 +102,11 @@ export const createGroup = async (req, res, next) => {
     }
     try {
         const newConvo = await createConversation(convoData)
+
+        if (typeof newConvo === 'string') {
+            return res.status(400).json({ message: newConvo })
+        }
+
         const populatedConvo = await populateConversation(
             newConvo._id,
             'users admin',
