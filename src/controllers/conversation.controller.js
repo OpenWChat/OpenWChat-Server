@@ -49,6 +49,11 @@ export const create_open_conversation = async (req, res, next) => {
                     'users',
                     '-password'
                 )
+
+                if (typeof populatedConvo === 'string') {
+                    return res.status(400).json({ message: populatedConvo })
+                }
+
                 res.status(200).json(populatedConvo)
             }
         } else {
@@ -75,6 +80,11 @@ export const getConversations = async (req, res, next) => {
     try {
         const user_id = req.user.userId
         const conversations = await getUserConversations(user_id)
+
+        if (typeof conversations === 'string') {
+            return res.status(400).json({ message: conversations })
+        }
+
         res.status(200).json(conversations)
     } catch (error) {
         next(error)
@@ -112,6 +122,11 @@ export const createGroup = async (req, res, next) => {
             'users admin',
             '-password'
         )
+
+        if (typeof populatedConvo === 'string') {
+            return res.status(400).json({ message: populatedConvo })
+        }
+
         res.status(200).json(populatedConvo)
     } catch (error) {
         next(error)
