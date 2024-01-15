@@ -38,7 +38,7 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
     console.info('Socket io connected successfully.')
-    socketServer(socket)
+    socketServer(socket, io)
 })
 
 // Error handling
