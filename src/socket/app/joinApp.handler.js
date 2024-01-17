@@ -7,5 +7,6 @@ export function joinApp(socket, io, onlineUsersMap) {
         }
 
         io.emit('get-online-users', Array.from(onlineUsersMap.keys()))
+        io.emit('setup socket', socket.id)
     }
 }

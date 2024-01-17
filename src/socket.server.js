@@ -1,4 +1,8 @@
-import { socketAppHandlers, socketMessagesHandlers } from './socket/index.js'
+import {
+    socketAppHandlers,
+    socketMessagesHandlers,
+    socketCallHandlers,
+} from './socket/index.js'
 
 let onlineUsersMap = new Map()
 
@@ -26,4 +30,10 @@ export default function (socket, io) {
 
     // stop typing
     socket.on('stop typing', socketMessagesHandlers.stopTyping(socket))
+
+    // call user
+    socket.on(
+        'call user',
+        socketCallHandlers.callUser(socket, io, onlineUsersMap)
+    )
 }
