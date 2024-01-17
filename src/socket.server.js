@@ -32,8 +32,11 @@ export default function (socket, io) {
     socket.on('stop typing', socketMessagesHandlers.stopTyping(socket))
 
     // call user
-    socket.on(
-        'call user',
-        socketCallHandlers.callUser(socket, io, onlineUsersMap)
-    )
+    socket.on('call user', socketCallHandlers.callUser(io, onlineUsersMap))
+
+    // answer call
+    socket.on('answer call', socketCallHandlers.answerCall(io))
+
+    // end call
+    socket.on('end call', socketCallHandlers.endCall(io))
 }
