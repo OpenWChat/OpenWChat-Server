@@ -10,7 +10,7 @@ const DB_URL = process.env.DB_URL
 const PORT = process.env.PORT || 8000
 
 mongoose
-    .connect(DB_URL)
+    .connect(DB_URL ?? "")
     .then(() => {
         console.log('🚀 ~ Conected to mongodb')
     })
