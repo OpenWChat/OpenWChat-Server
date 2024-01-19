@@ -11,7 +11,7 @@ import fileupload from 'express-fileupload'
 import cors from 'cors'
 import routes from './routes/index.js'
 
-const app = express()
+const app: any = express()
 
 // Middlewares
 
