@@ -1,3 +1,4 @@
+import { type Socket } from 'socket.io'
 import {
     socketAppHandlers,
     socketMessagesHandlers,
@@ -6,7 +7,7 @@ import {
 
 let onlineUsersMap = new Map()
 
-export default function (socket, io) {
+export default function (socket: Socket, io) {
     // user joins or opens the app
     socket.on('join', socketAppHandlers.joinApp(socket, io, onlineUsersMap))
 

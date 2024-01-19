@@ -41,6 +41,7 @@
         "@types/express-fileupload": "^1.4.4",
         "@types/morgan": "^1.9.9",
         "@types/node": "^20.11.5",
+        "@types/socket.io": "^3.0.2",
         "eslint": "^8.56.0",
         "nodemon": "^3.0.3",
         "ts-node": "^10.9.2"
