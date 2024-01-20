@@ -7,7 +7,10 @@ import {
 
 let onlineUsersMap = new Map()
 
-export default function (socket: Socket, io) {
+export default function (
+    socket: Socket,
+    io: { connect(url: string): Socket; to: any }
+) {
     // user joins or opens the app
     socket.on('join', socketAppHandlers.joinApp(socket, io, onlineUsersMap))
 
@@ -36,7 +39,7 @@ export default function (socket: Socket, io) {
     socket.on('call user', socketCallHandlers.callUser(io, onlineUsersMap))
 
     // answer call
-    socket.on('answer call', socketCallHandlers.answerCall(io))
+    socket.on('answer call', socketCallHandlers.answerCall(socket, io))
 
     // end call
     socket.on('end call', socketCallHandlers.endCall(io))

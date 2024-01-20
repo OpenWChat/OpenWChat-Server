@@ -29,7 +29,7 @@ const server = app.listen(PORT, () => {
 
 // SocketIO
 
-const io = new Server(server, {
+const io: any = new Server(server, {
     pingTimeout: 60000,
     cors: {
         origin: process.env.CLINT_ENDPOINT,
