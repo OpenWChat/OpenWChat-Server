@@ -1,6 +1,17 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema, Document } from 'mongoose'
+
 const { ObjectId } = mongoose.Schema.Types
-const conversationSchema = mongoose.Schema(
+
+export interface IConversationDocument extends Document {
+    name: string
+    picture: string
+    isGroup: boolean
+    users: (typeof ObjectId)[]
+    latestMessage: typeof ObjectId
+    admin: typeof ObjectId
+}
+
+const conversationSchema = new Schema<IConversationDocument>(
     {
         name: {
             type: String,
@@ -39,4 +50,7 @@ const conversationSchema = mongoose.Schema(
 
 export const ConversationModel =
     mongoose.models.ConversationModel ||
-    mongoose.model('ConversationModel', conversationSchema)
+    mongoose.model<IConversationDocument>(
+        'ConversationModel',
+        conversationSchema
+    )

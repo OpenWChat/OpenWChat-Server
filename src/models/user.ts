@@ -1,7 +1,17 @@
-import mongoose from 'mongoose'
-import validator from 'validator'
+import mongoose, { Document, Schema, model } from 'mongoose';
+import validator from 'validator';
 
-const userSchema = mongoose.Schema(
+interface IUser {
+    name: string;
+    email: string;
+    picture?: string;
+    status?: string;
+    password: string;
+}
+
+interface IUserDocument extends IUser, Document {}
+
+const userSchema = new Schema<IUserDocument>(
     {
         name: {
             type: String,
@@ -10,12 +20,9 @@ const userSchema = mongoose.Schema(
         email: {
             type: String,
             required: [true, 'Please provide your email address'],
-            unique: [true, 'This email address already exists'],
+            unique: true,
             lowercase: true,
-            validate: [
-                validator.isEmail,
-                'Please provide a valid email address',
-            ],
+            validate: [validator.isEmail, 'Please provide a valid email address'],
         },
         picture: {
             type: String,
@@ -43,7 +50,6 @@ const userSchema = mongoose.Schema(
         collection: 'users',
         timestamps: true,
     }
-)
+);
 
-export const UserModel =
-    mongoose.models.UserModel || mongoose.model('UserModel', userSchema)
+export const UserModel = model<IUserDocument>('UserModel', userSchema);

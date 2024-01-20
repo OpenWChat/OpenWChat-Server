@@ -5,7 +5,7 @@ import {
     populateMessage,
 } from '../services/message.service.js'
 
-export const sendMessage = async (req, res, next) => {
+export const sendMessage: RequestHandler = async (req, res, next) => {
     try {
         const user_id = req.user.userId
         const { message, convo_id, files } = req.body
@@ -40,7 +40,7 @@ export const sendMessage = async (req, res, next) => {
         next(error)
     }
 }
-export const getMessages = async (req, res, next) => {
+export const getMessages: RequestHandler = async (req, res, next) => {
     try {
         const convo_id = req.params.convo_id
         if (!convo_id) {

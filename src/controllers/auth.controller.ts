@@ -1,8 +1,9 @@
+import { type RequestHandler } from 'express'
 import { createUser, signUser } from '../services/auth.service.js'
 import { generateToken, verifyToken } from '../services/token.service.js'
 import { findUser } from '../services/user.service.js'
 
-export const register = async (req, res, next) => {
+export const register: RequestHandler = async (req, res, next) => {
     try {
         const { name, email, picture, status, password } = req.body
         const newUser = await createUser({
@@ -50,7 +51,7 @@ export const register = async (req, res, next) => {
     }
 }
 
-export const login = async (req, res, next) => {
+export const login: RequestHandler = async (req, res, next) => {
     try {
         const { email, password } = req.body
         const user = await signUser(email, password)
@@ -103,7 +104,7 @@ export const logout = async (_req, res, next) => {
     }
 }
 
-export const refreshToken = async (req, res, next) => {
+export const refreshToken: RequestHandler = async (req, res, next) => {
     try {
         const refresh_token = req.cookies.refreshtoken
         if (!refresh_token)

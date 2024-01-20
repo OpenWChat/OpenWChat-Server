@@ -1,8 +1,15 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema, Document } from 'mongoose';
 
-const { ObjectId } = mongoose.Schema.Types
+const { ObjectId } = mongoose.Schema.Types;
 
-const messageSchema = mongoose.Schema(
+export interface IMessageDocument extends Document {
+    sender: typeof ObjectId;
+    message: string;
+    conversation: typeof ObjectId;
+    files: any[];
+}
+
+const messageSchema = new Schema<IMessageDocument>(
     {
         sender: {
             type: ObjectId,
@@ -16,14 +23,16 @@ const messageSchema = mongoose.Schema(
             type: ObjectId,
             ref: 'ConversationModel',
         },
-        files: [],
+        files: {
+            type: [Schema.Types.Mixed] as Array<Record<string, any>>,
+        },
     },
     {
         collection: 'messages',
         timestamps: true,
     }
-)
+);
 
-export const MessageModel =
-    mongoose.models.MessageModel ||
-    mongoose.model('MessageModel', messageSchema)
+
+export const MessageModel = mongoose.models.MessageModel ||
+    mongoose.model<IMessageDocument>('MessageModel', messageSchema);
