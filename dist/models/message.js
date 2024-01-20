@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 const { ObjectId } = mongoose.Schema.Types;
-const messageSchema = mongoose.Schema({
+const messageSchema = new Schema({
     sender: {
         type: ObjectId,
         ref: 'UserModel',
@@ -13,7 +13,9 @@ const messageSchema = mongoose.Schema({
         type: ObjectId,
         ref: 'ConversationModel',
     },
-    files: [],
+    files: {
+        type: [Schema.Types.Mixed],
+    },
 }, {
     collection: 'messages',
     timestamps: true,

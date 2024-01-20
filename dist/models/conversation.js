@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 const { ObjectId } = mongoose.Schema.Types;
-const conversationSchema = mongoose.Schema({
+const conversationSchema = new Schema({
     name: {
         type: String,
         required: [true, 'Conversations name is required.'],

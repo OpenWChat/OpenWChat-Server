@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 import validator from 'validator';
-const userSchema = mongoose.Schema({
+const userSchema = new Schema({
     name: {
         type: String,
         required: [true, 'Please provide your name'],
@@ -8,12 +8,9 @@ const userSchema = mongoose.Schema({
     email: {
         type: String,
         required: [true, 'Please provide your email address'],
-        unique: [true, 'This email address already exists'],
+        unique: true,
         lowercase: true,
-        validate: [
-            validator.isEmail,
-            'Please provide a valid email address',
-        ],
+        validate: [validator.isEmail, 'Please provide a valid email address'],
     },
     picture: {
         type: String,
@@ -39,5 +36,5 @@ const userSchema = mongoose.Schema({
     collection: 'users',
     timestamps: true,
 });
-export const UserModel = mongoose.models.UserModel || mongoose.model('UserModel', userSchema);
+export const UserModel = model('UserModel', userSchema);
 //# sourceMappingURL=user.js.map

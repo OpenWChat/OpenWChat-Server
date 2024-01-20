@@ -2,6 +2,7 @@ import { type RequestHandler } from 'express'
 import { createUser, signUser } from '../services/auth.service.js'
 import { generateToken, verifyToken } from '../services/token.service.js'
 import { findUser } from '../services/user.service.js'
+import { IUser } from '../models/user.js'
 
 export const register: RequestHandler = async (req, res, next) => {
     try {
@@ -93,7 +94,7 @@ export const login: RequestHandler = async (req, res, next) => {
     }
 }
 
-export const logout = async (_req, res, next) => {
+export const logout: RequestHandler = async (_req, res, next) => {
     try {
         res.clearCookie('refreshtoken', { path: '/api/v1/auth/refreshtoken' })
         res.json({
@@ -115,7 +116,8 @@ export const refreshToken: RequestHandler = async (req, res, next) => {
             refresh_token,
             process.env.REFRESH_TOKEN_SECRET
         )
-        const user = await findUser(check.userId)
+        
+        const user = await findUser(check.userId) as IUser
         const access_token = await generateToken(
             { userId: user._id },
             '1d',
