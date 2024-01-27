@@ -23,7 +23,7 @@ export const register = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
         if (typeof newUser === 'string') {
             return res.status(400).json({ message: newUser });
         }
-        const access_token = yield generateToken({ userId: newUser._id }, '1d', process.env.ACCESS_TOKEN_SECRET);
+        const access_token = yield generateToken({ userId: String(newUser._id) }, '1d', process.env.ACCESS_TOKEN_SECRET);
         const refresh_token = yield generateToken({ userId: newUser._id }, '30d', process.env.REFRESH_TOKEN_SECRET);
         res.cookie('refreshtoken', refresh_token, {
             httpOnly: true,
