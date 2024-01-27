@@ -1,3 +1,4 @@
+import { RequestHandler } from 'express'
 import {
     createConversation,
     doesConversationExist,
@@ -5,7 +6,7 @@ import {
     populateConversation,
 } from '../services/conversation.service.js'
 
-export const create_open_conversation: RequestHandler = async (req, res, next) => {
+export const create_open_conversation: RequestHandler = async (req: any, res, next) => {
     try {
         const sender_id = req.user.userId
         const { receiver_id, isGroup } = req.body
@@ -76,7 +77,7 @@ export const create_open_conversation: RequestHandler = async (req, res, next) =
     }
 }
 
-export const getConversations: RequestHandler = async (req, res, next) => {
+export const getConversations: RequestHandler = async (req: any, res, next) => {
     try {
         const user_id = req.user.userId
         const conversations = await getUserConversations(user_id)
@@ -90,7 +91,7 @@ export const getConversations: RequestHandler = async (req, res, next) => {
         next(error)
     }
 }
-export const createGroup: RequestHandler = async (req, res, next) => {
+export const createGroup: RequestHandler = async (req: any, res, next) => {
     const { name, users } = req.body
     users.push(req.user.userId)
     if (!name || !users) {
