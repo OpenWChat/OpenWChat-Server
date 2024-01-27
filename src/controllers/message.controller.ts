@@ -1,3 +1,4 @@
+import { RequestHandler } from 'express'
 import { updateLatestMessage } from '../services/conversation.service.js'
 import {
     createMessage,
@@ -5,7 +6,7 @@ import {
     populateMessage,
 } from '../services/message.service.js'
 
-export const sendMessage: RequestHandler = async (req, res, next) => {
+export const sendMessage: RequestHandler = async (req: any, res, next) => {
     try {
         const user_id = req.user.userId
         const { message, convo_id, files } = req.body
