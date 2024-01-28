@@ -4,13 +4,11 @@ import {
     socketMessagesHandlers,
     socketCallHandlers,
 } from './socket/index.js'
+import * as SocketIO from 'socket.io'
 
-let onlineUsersMap = new Map()
+let onlineUsersMap = new Map<string, Socket>()
 
-export default function (
-    socket: Socket,
-    io: { connect(url: string): Socket; to: any }
-) {
+export default function (socket: Socket, io: SocketIO.Server) {
     // user joins or opens the app
     socket.on('join', socketAppHandlers.joinApp(socket, io, onlineUsersMap))
 

@@ -100,8 +100,6 @@
   },
   "include": [
       "src/**/*",
-      "src/express.d.ts",
-      "src/middlewares/adminAuthorize/adminAuthorize.ts",
   ],
   "exclude": ["node_modules", "node_modules/**/*", "dist/**/*"],
   "extends": "@tsconfig/node16/tsconfig.json"

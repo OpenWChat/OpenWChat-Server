@@ -1,13 +1,17 @@
-export function sendMessage(socket) {
-    return (message) => {
-        let conversation = message.conversation;
+import { Socket } from 'socket.io'
 
-        if (!conversation.users) return;
+export function sendMessage(socket: Socket) {
+    return (message: any) => {
+        let conversation: any = message.conversation
 
-        conversation.users.forEach((user) => {
-            if (user._id === message.sender._id) return;
+        if (!conversation.users) return
 
-            socket.in(String(message.conversation._id)).emit('message received', message);
-        });
-    };
+        conversation.users.forEach((user: any) => {
+            if (user._id === message.sender._id) return
+
+            socket
+                .in(String(message.conversation._id))
+                .emit('message received', message)
+        })
+    }
 }

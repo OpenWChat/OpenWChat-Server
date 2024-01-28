@@ -6,7 +6,9 @@ export function sendMessage(socket) {
         conversation.users.forEach((user) => {
             if (user._id === message.sender._id)
                 return;
-            socket.in(String(message.conversation._id)).emit('message received', message);
+            socket
+                .in(String(message.conversation._id))
+                .emit('message received', message);
         });
     };
 }

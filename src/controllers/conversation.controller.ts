@@ -5,8 +5,13 @@ import {
     getUserConversations,
     populateConversation,
 } from '../services/conversation.service.js'
+import { IConversationDocument } from 'models/conversation.js'
 
-export const create_open_conversation: RequestHandler = async (req: any, res, next) => {
+export const create_open_conversation: RequestHandler = async (
+    req: any,
+    res,
+    next
+) => {
     try {
         const sender_id = req.user.userId
         const { receiver_id, isGroup } = req.body
@@ -39,7 +44,9 @@ export const create_open_conversation: RequestHandler = async (req: any, res, ne
                     isGroup: false,
                     users: [sender_id, receiver_id],
                 }
-                const newConvo = await createConversation(convoData)
+                const newConvo = await createConversation(
+                    convoData as IConversationDocument
+                )
 
                 if (typeof newConvo === 'string') {
                     return res.status(400).json({ message: newConvo })
@@ -112,7 +119,9 @@ export const createGroup: RequestHandler = async (req: any, res, next) => {
         picture: process.env.DEFAULT_GROUP_PICTURE,
     }
     try {
-        const newConvo = await createConversation(convoData)
+        const newConvo = await createConversation(
+            convoData as IConversationDocument
+        )
 
         if (typeof newConvo === 'string') {
             return res.status(400).json({ message: newConvo })

@@ -5,6 +5,7 @@ import {
     getConvoMessages,
     populateMessage,
 } from '../services/message.service.js'
+import { IMessageDocument } from 'models/message.js'
 
 export const sendMessage: RequestHandler = async (req: any, res, next) => {
     try {
@@ -22,7 +23,7 @@ export const sendMessage: RequestHandler = async (req: any, res, next) => {
             conversation: convo_id,
             files: files || [],
         }
-        let newMessage = await createMessage(msgData)
+        let newMessage = await createMessage(msgData as IMessageDocument)
 
         if (typeof newMessage === 'string') {
             return res.status(400).json({ message: newMessage })

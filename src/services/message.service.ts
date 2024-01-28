@@ -1,11 +1,12 @@
+import { IMessageDocument } from 'models/message.js'
 import { MessageModel } from '../models/index.js'
-export const createMessage = async (data) => {
+export const createMessage = async (data: IMessageDocument) => {
     let newMessage = await MessageModel.create(data)
     if (!newMessage) return 'Oops...Something went wrong !'
     return newMessage
 }
 
-export const populateMessage = async (id) => {
+export const populateMessage = async (id: string) => {
     let msg = await MessageModel.findById(id)
         .populate({
             path: 'sender',
@@ -26,7 +27,7 @@ export const populateMessage = async (id) => {
     return msg
 }
 
-export const getConvoMessages = async (convo_id) => {
+export const getConvoMessages = async (convo_id: string) => {
     const messages = await MessageModel.find({ conversation: convo_id })
         .populate('sender', 'name picture email status')
         .populate('conversation')

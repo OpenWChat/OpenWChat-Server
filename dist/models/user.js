@@ -10,7 +10,10 @@ const userSchema = new Schema({
         required: [true, 'Please provide your email address'],
         unique: true,
         lowercase: true,
-        validate: [validator.isEmail, 'Please provide a valid email address'],
+        validate: [
+            validator.isEmail,
+            'Please provide a valid email address',
+        ],
     },
     picture: {
         type: String,

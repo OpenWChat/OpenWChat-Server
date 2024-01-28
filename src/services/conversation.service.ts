@@ -1,9 +1,10 @@
+import { IConversationDocument } from 'models/conversation.js'
 import { ConversationModel, UserModel } from '../models/index.js'
 
 export const doesConversationExist = async (
-    sender_id,
-    receiver_id,
-    isGroup
+    sender_id: string,
+    receiver_id: string,
+    isGroup: boolean
 ) => {
     if (isGroup === false) {
         let convos = await ConversationModel.find({
@@ -16,8 +17,7 @@ export const doesConversationExist = async (
             .populate('users', '-password')
             .populate('latestMessage')
 
-        if (!convos)
-            return ('Oops...Something went wrong !')
+        if (!convos) return 'Oops...Something went wrong !'
 
         convos = await UserModel.populate(convos, {
             path: 'latestMessage.sender',
@@ -30,8 +30,7 @@ export const doesConversationExist = async (
             .populate('users admin', '-password')
             .populate('latestMessage')
 
-        if (!convo)
-            return ('Oops...Something went wrong !')
+        if (!convo) return 'Oops...Something went wrong !'
         convo = await UserModel.populate(convo, {
             path: 'latestMessage.sender',
             select: 'name email picture status',
@@ -41,27 +40,25 @@ export const doesConversationExist = async (
     }
 }
 
-export const createConversation = async (data) => {
+export const createConversation = async (data: IConversationDocument) => {
     const newConvo = await ConversationModel.create(data)
-    if (!newConvo)
-        return ('Oops...Something went wrong !')
+    if (!newConvo) return 'Oops...Something went wrong !'
     return newConvo
 }
 
 export const populateConversation = async (
-    id,
-    fieldToPopulate,
-    fieldsToRemove
+    id: string,
+    fieldToPopulate: string,
+    fieldsToRemove: string
 ) => {
     const populatedConvo = await ConversationModel.findOne({
         _id: id,
     }).populate(fieldToPopulate, fieldsToRemove)
-    
-    if (!populatedConvo)
-        return ('Oops...Something went wrong !')
+
+    if (!populatedConvo) return 'Oops...Something went wrong !'
     return populatedConvo
 }
-export const getUserConversations = async (user_id) => {
+export const getUserConversations = async (user_id: string) => {
     let conversations
     await ConversationModel.find({
         users: { $elemMatch: { $eq: user_id } },
@@ -78,17 +75,16 @@ export const getUserConversations = async (user_id) => {
             conversations = results
         })
         .catch(() => {
-            return ('Oops...Something went wrong !')
+            return 'Oops...Something went wrong !'
         })
     return conversations
 }
 
-export const updateLatestMessage = async (convo_id, msg) => {
+export const updateLatestMessage = async (convo_id: string, msg: string) => {
     const updatedConvo = await ConversationModel.findByIdAndUpdate(convo_id, {
         latestMessage: msg,
     })
-    if (!updatedConvo)
-        return ('Oops...Something went wrong !')
+    if (!updatedConvo) return 'Oops...Something went wrong !'
 
     return updatedConvo
 }

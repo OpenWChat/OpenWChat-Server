@@ -1,5 +1,5 @@
 import express from 'express'
-import authMiddleware from '../middlewares/authMiddleware.js'
+import { authMiddleware } from '../middlewares/authMiddleware.js'
 import { sendMessage, getMessages } from '../controllers/message.controller.js'
 const router = express.Router()
 

@@ -7,7 +7,7 @@ dotenv.config();
 const DB_URL = process.env.DB_URL;
 const PORT = process.env.PORT || 8000;
 mongoose
-    .connect(DB_URL !== null && DB_URL !== void 0 ? DB_URL : "")
+    .connect(DB_URL !== null && DB_URL !== void 0 ? DB_URL : '')
     .then(() => {
     console.log('🚀 ~ Conected to mongodb');
 })

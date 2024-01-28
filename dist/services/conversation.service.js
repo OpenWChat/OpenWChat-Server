@@ -20,7 +20,7 @@ export const doesConversationExist = (sender_id, receiver_id, isGroup) => __awai
             .populate('users', '-password')
             .populate('latestMessage');
         if (!convos)
-            return ('Oops...Something went wrong !');
+            return 'Oops...Something went wrong !';
         convos = yield UserModel.populate(convos, {
             path: 'latestMessage.sender',
             select: 'name email picture status',
@@ -32,7 +32,7 @@ export const doesConversationExist = (sender_id, receiver_id, isGroup) => __awai
             .populate('users admin', '-password')
             .populate('latestMessage');
         if (!convo)
-            return ('Oops...Something went wrong !');
+            return 'Oops...Something went wrong !';
         convo = yield UserModel.populate(convo, {
             path: 'latestMessage.sender',
             select: 'name email picture status',
@@ -43,7 +43,7 @@ export const doesConversationExist = (sender_id, receiver_id, isGroup) => __awai
 export const createConversation = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const newConvo = yield ConversationModel.create(data);
     if (!newConvo)
-        return ('Oops...Something went wrong !');
+        return 'Oops...Something went wrong !';
     return newConvo;
 });
 export const populateConversation = (id, fieldToPopulate, fieldsToRemove) => __awaiter(void 0, void 0, void 0, function* () {
@@ -51,7 +51,7 @@ export const populateConversation = (id, fieldToPopulate, fieldsToRemove) => __a
         _id: id,
     }).populate(fieldToPopulate, fieldsToRemove);
     if (!populatedConvo)
-        return ('Oops...Something went wrong !');
+        return 'Oops...Something went wrong !';
     return populatedConvo;
 });
 export const getUserConversations = (user_id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -71,7 +71,7 @@ export const getUserConversations = (user_id) => __awaiter(void 0, void 0, void 
         conversations = results;
     }))
         .catch(() => {
-        return ('Oops...Something went wrong !');
+        return 'Oops...Something went wrong !';
     });
     return conversations;
 });
@@ -80,7 +80,7 @@ export const updateLatestMessage = (convo_id, msg) => __awaiter(void 0, void 0, 
         latestMessage: msg,
     });
     if (!updatedConvo)
-        return ('Oops...Something went wrong !');
+        return 'Oops...Something went wrong !';
     return updatedConvo;
 });
 //# sourceMappingURL=conversation.service.js.map

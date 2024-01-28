@@ -1,5 +1,7 @@
+import { RequestHandler } from 'express'
 import { searchUsers as searchUsersService } from '../services/user.service.js'
-export const searchUsers: RequestHandler = async (req, res, next) => {
+
+export const searchUsers: RequestHandler = async (req: any, res, next) => {
     try {
         const keyword = req.query.search
         if (!keyword) {

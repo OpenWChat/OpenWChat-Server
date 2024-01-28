@@ -1,5 +1,11 @@
-export function joinApp(socket, io, onlineUsersMap) {
-    return (userId) => {
+import * as SocketIO from 'socket.io'
+
+export function joinApp(
+    socket: SocketIO.Socket,
+    io: SocketIO.Server,
+    onlineUsersMap: any
+) {
+    return (userId: string) => {
         socket.join(userId)
 
         if (!onlineUsersMap.has(userId)) {

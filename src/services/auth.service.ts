@@ -1,10 +1,11 @@
 import validator from 'validator'
 import { UserModel } from '../models/index.js'
 import bcrypt from 'bcrypt'
+import { IUser } from 'models/user.js'
 
 const { DEFAULT_PICTURE, DEFAULT_STATUS } = process.env
 
-export const createUser = async (userData) => {
+export const createUser = async (userData: IUser) => {
     const { name, email, picture, status, password } = userData
 
     if (!name || !email || !password) {
@@ -57,7 +58,7 @@ export const createUser = async (userData) => {
     return user
 }
 
-export const signUser = async (email, password) => {
+export const signUser = async (email: string, password: string) => {
     const user = await UserModel.findOne({ email: email.toLowerCase() }).lean()
 
     if (!user) return 'Invalid credentials.'
