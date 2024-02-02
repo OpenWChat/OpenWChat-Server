@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+            target: development
+        env_file:
+            - .env
+        ports:
+            - '8000:8000'
+        volumes:
+            - ./src:/usr/src/app/src
+            - ./tsconfig.json:/usr/src/app/tsconfig.json
+        environment:
+            - NODE_ENV=development
+        command: npm run dev
+    prod-app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: production
+        env_file:
+            - .env
+        ports:
+            - '8001:8000'
+        volumes:
+            - ./src:/usr/src/app/src
+            - ./tsconfig.json:/usr/src/app/tsconfig.json
+        environment:
+            - NODE_ENV=production
+        command: npm run start
