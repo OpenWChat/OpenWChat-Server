@@ -30,6 +30,7 @@ OpenWChat-server is the backend repository powering the OpenWChat app, a WhatsAp
 - `TypeScript`: A statically typed superset of JavaScript that enhances code maintainability and scalability.
 - `Socket.IO`: Real-time bidirectional event-based communication for enabling instant messaging features.
 - `MongoDB`: A NoSQL database for efficient and scalable data storage.
+- `Docker`: A platform for developing, shipping, and running applications in containers.
 
 ## Getting Started
 
@@ -43,20 +44,21 @@ Follow these steps to get a local copy up and running:
 git clone https://github.com/OpenWChat/OpenWChat-server.git
 ```
 
-2. Install dependencies:
-
-```sh
-npm install
-```
-
-3. Set up environment variables:
+2. Set up environment variables:
 Create a `.env` file based on the provided `.env.example` and add your configurations.
 
-4. Run the server:
+3. Build the Docker image for the app service:
 
 ```sh
-npm run dev
+docker-compose build app
 ```
+
+4. Run the application using Docker Compose:
+
+```sh
+docker-compose up -d
+```
+The application should now be running. Access it at `http://localhost:8000`.
 
 ## Contributing
 
