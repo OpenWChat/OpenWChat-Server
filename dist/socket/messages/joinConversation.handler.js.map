@@ -1,1 +1,0 @@
-{"version":3,"file":"joinConversation.handler.js","sourceRoot":"","sources":["../../../src/socket/messages/joinConversation.handler.ts"],"names":[],"mappings":"AAEA,MAAM,UAAU,gBAAgB,CAAC,MAAc;IAC3C,OAAO,CAAC,cAAsB,EAAE,EAAE;QAC9B,MAAM,CAAC,IAAI,CAAC,cAAc,CAAC,CAAA;IAC/B,CAAC,CAAA;AACL,CAAC"}
