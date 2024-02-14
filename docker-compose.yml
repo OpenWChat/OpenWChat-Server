@@ -21,6 +21,7 @@ services:
             - NODE_ENV=development
         command: npm run dev
 
+
     prod-app:
         container_name: OpenWChat-prod-server
         restart: always
@@ -40,6 +41,7 @@ services:
         environment:
             - NODE_ENV=production
         command: npm run start
+
 
     mongo:
         container_name: mongo
