@@ -5,7 +5,8 @@ import {
     getUserConversations,
     populateConversation,
 } from '../services/conversation.service.js'
-import { IConversationDocument } from 'models/conversation.js'
+import { IConversationDocument } from '../models/conversation.js'
+import { UserModel } from '../models/user.js'
 
 export const create_open_conversation: RequestHandler = async (
     req: any,
@@ -38,9 +39,11 @@ export const create_open_conversation: RequestHandler = async (
             if (existed_conversation) {
                 res.json(existed_conversation)
             } else {
+                const receiverUser: any = UserModel.findById(receiver_id)
+
                 let convoData = {
-                    name: 'conversation name',
-                    picture: 'conversation picture',
+                    name: receiverUser.name,
+                    picture: receiverUser.picture,
                     isGroup: false,
                     users: [sender_id, receiver_id],
                 }
