@@ -56,7 +56,7 @@ docker-compose build app
 4. Run the application using Docker Compose:
 
 ```sh
-docker-compose up -d
+docker-compose up app
 ```
 The application should now be running. Access it at `http://localhost:8000`.
 
@@ -68,9 +68,10 @@ We welcome contributions from the community to enhance OpenWChat. If you'd like 
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+3. State your Changes (`npm run clean`)
+4. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+5. Push to the Branch (`git push origin feature/AmazingFeature`)
+6. Open a Pull Request
 
 ## License
 
