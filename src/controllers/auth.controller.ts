@@ -2,7 +2,7 @@ import { type RequestHandler } from 'express'
 import { createUser, signUser } from '../services/auth.service.js'
 import { generateToken, verifyToken } from '../services/token.service.js'
 import { findUser } from '../services/user.service.js'
-import { IUser } from '../models/user.js'
+import { IUser } from '../models/user.model.js'
 
 export const register: RequestHandler = async (req, res, next) => {
     try {

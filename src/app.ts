@@ -10,6 +10,9 @@ import compression from 'compression'
 import fileupload from 'express-fileupload'
 import cors from 'cors'
 import routes from './routes/index.js'
+import swaggerUi from 'swagger-ui-express'
+import { specs } from './utils/swagger.util.js'
+import { serveSwaggerJson } from './configs/serveSwaggerJson.config.js'
 
 const app: any = express()
 
@@ -41,5 +44,8 @@ app.use(cors())
 // Routes
 
 app.use('/api/v1', routes)
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
+app.get('/swagger.json', serveSwaggerJson)
 
 export default app

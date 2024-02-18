@@ -1,7 +1,7 @@
 import validator from 'validator'
 import { UserModel } from '../models/index.js'
 import bcrypt from 'bcrypt'
-import { IUser } from 'models/user.js'
+import { IUser } from 'models/user.model.js'
 
 const { DEFAULT_PICTURE, DEFAULT_STATUS } = process.env
 
