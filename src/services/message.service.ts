@@ -1,4 +1,4 @@
-import { IMessageDocument } from 'models/message.js'
+import { IMessageDocument } from 'models/message.model.js'
 import { MessageModel } from '../models/index.js'
 export const createMessage = async (data: IMessageDocument) => {
     let newMessage = await MessageModel.create(data)

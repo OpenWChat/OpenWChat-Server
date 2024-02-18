@@ -5,8 +5,8 @@ import {
     getUserConversations,
     populateConversation,
 } from '../services/conversation.service.js'
-import { IConversationDocument } from '../models/conversation.js'
-import { UserModel } from '../models/user.js'
+import { IConversationDocument } from '../models/conversation.model.js'
+import { UserModel } from '../models/user.model.js'
 
 export const create_open_conversation: RequestHandler = async (
     req: any,

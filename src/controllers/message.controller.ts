@@ -5,7 +5,7 @@ import {
     getConvoMessages,
     populateMessage,
 } from '../services/message.service.js'
-import { IMessageDocument } from 'models/message.js'
+import { IMessageDocument } from 'models/message.model.js'
 
 export const sendMessage: RequestHandler = async (req: any, res, next) => {
     try {

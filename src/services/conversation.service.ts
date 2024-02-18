@@ -1,4 +1,4 @@
-import { IConversationDocument } from 'models/conversation.js'
+import { IConversationDocument } from 'models/conversation.model.js'
 import { ConversationModel, UserModel } from '../models/index.js'
 
 export const doesConversationExist = async (
