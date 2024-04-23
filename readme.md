@@ -44,21 +44,31 @@ Follow these steps to get a local copy up and running:
 git clone https://github.com/OpenWChat/OpenWChat-server.git
 ```
 
-2. Set up environment variables:
-Create a `.env` file based on the provided `.env.example` and add your configurations.
+## Running locally
 
-3. Build the Docker image for the app service:
+**Without docker**
 
-```sh
-docker-compose build app
+1. Provide environment variables based on the .env.example file.
+2. Install dependencies:
+
+```bash
+npm install
 ```
 
-4. Run the application using Docker Compose:
+3. Run the development server:
+```bash
+npm run dev
+```
 
-```sh
+**With docker**
+
+1. Provide environment variables based on the .env.example file.
+2. Make sure Docker is installed and running on your system.
+3. Run the following command to start both the server and RTMP microservice using Docker Compose:
+
+```bash
 docker-compose up app
 ```
-The application should now be running. Access it at `http://localhost:8000`.
 
 ## Contributing
 
